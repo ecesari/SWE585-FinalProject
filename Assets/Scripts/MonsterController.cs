@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class MonsterController : MonoBehaviour
 {
@@ -30,8 +32,14 @@ public class MonsterController : MonoBehaviour
         
         if(collision.gameObject.tag == "Player"){
             Destroy(collision.gameObject);
-        }else{
+           ResetGame();
+        }else if(collision.gameObject.tag == "LeftTile" || collision.gameObject.tag == "RightTile"){
             isGoingRight = (isGoingRight?false:true);
         }
+    }
+
+    public void ResetGame(){
+         SceneManager.LoadScene("SampleScene");
+        
     }
 }

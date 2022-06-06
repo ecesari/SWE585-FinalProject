@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -46,10 +47,17 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            transform.position = SpawnPosition.position;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            ResetGame();
         }
+    }
+
+    public void ResetGame(){
+        transform.position = SpawnPosition.position;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+       SceneManager.LoadScene("SampleScene");
+        superJumps = 3;
+        currentPoints = 0;
     }
 
     public void Move()
