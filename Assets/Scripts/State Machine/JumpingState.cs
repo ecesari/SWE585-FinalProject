@@ -58,6 +58,7 @@ public class JumpingState : BaseState
                     playerStateMachine.ChangeState(playerStateMachine.superJumpingState);
                     playerController.SuperJump();
                     playerController.superJumps--;
+                    playerController.playerText.SetText("Remaining Super Jumps: " + playerController.superJumps);
 
                     resetPressTimer();
                 }

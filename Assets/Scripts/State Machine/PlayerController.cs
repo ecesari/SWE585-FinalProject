@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private float currentSpeed;
     public int superJumps;
+    private int currentPoints;
 
 
     [HideInInspector]
@@ -22,13 +24,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform SpawnPosition;
 
+    public TextMeshProUGUI playerText;
+    public TextMeshProUGUI pointsText;
+
+
     // Start is called before the first frame update
     void Start()
     {
         capsuleCollider = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
-        currentSpeed = 100.0f; 
-        superJumps = 1;
+        currentSpeed = 100.0f;
+        superJumps = 3;
+        currentPoints = 0;
     }
 
     // Update is called once per frame
@@ -75,6 +82,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(new Vector3(0, superJumpForce, 0));
+
     }
 
     public void AddGravity(float force)
@@ -98,6 +106,15 @@ public class PlayerController : MonoBehaviour
         if (collision != null)
         {
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 7)
+        {
+            currentPoints++;
+            pointsText.SetText("Score: " + currentPoints);
         }
     }
 
